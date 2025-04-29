@@ -1,1 +1,1 @@
-[![Tests status](https://github.com/BeataMekal/demo-saas/.github/workflows/test-runner.yaml/badge.svg)](https://github.com/BeataMekal/demo-saas/.github/workflows/test-runner.yaml)
+[![Tests status](https://github.com/BeataMekal/demo-saas/actions/workflows/test-runner.yaml/badge.svg)](https://github.com/BeataMekal/demo-saas/actions/workflows/test-runner.yaml)
