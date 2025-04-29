@@ -1,18 +1,61 @@
 import { test, expect } from '@playwright/test';
 
-test('Successful Log in', async ({ page }) => {
-  await page.goto('https://demo-saas.bugbug.io/');
+import {username, password} from '../config/config-variables'
+import { LoginPage } from '../src/pages/login.page';
+test.describe('Verify Log in to the system', () => {
+  test.beforeEach(async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await page.goto('');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Demo SaaS/);
+    await expect(page).toHaveTitle(/Demo SaaS/);
 
-  await page.locator('span', { hasText: 'Log in'}).first().click();
-  await expect(page.locator('p', { hasText: 'Log in'})).toBeVisible();
+    await loginPage.logInButtonHomePage.click();
+    await expect(loginPage.loginHeading).toBeVisible();
+  });
 
-  await page.locator('input[name="email"]').fill('betikotek@gmail.com');
-  await page.locator('input[name="password"]').fill('Test1234');
+  test('Successful Log in', async ({ page }) => {
+    const loginPage = new LoginPage(page);
 
-  await page.locator('button[type="submit"] span span', { hasText: 'Log in'}).click();
+    await loginPage.emailInput.fill(username);
+    await loginPage.passwordInput.fill(password);
 
-  await expect(page.locator('p span', {hasText: 'Title'})).toBeVisible();
+    await loginPage.loginButton.click();
+
+    await expect(loginPage.pageHeading).toBeVisible();
+  });
+
+  test('Unsuccessful log in to system - invalid email', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const invalidEmail = 'eee@ttt.pl';
+
+    await loginPage.emailInput.fill(invalidEmail);
+    await loginPage.passwordInput.fill(password);
+
+    await loginPage.loginButton.click();
+
+    await expect(loginPage.loginErrorMessage).toBeVisible();
+  });
+  test('Unsuccessful log in to system - invalid email without @', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const invalidEmail = 'test.gmail.com';
+   
+    await loginPage.emailInput.fill(invalidEmail);
+    await loginPage.passwordInput.fill(password);
+
+    await loginPage.loginButton.click();
+
+    await expect(loginPage.invalidEmailErrorMessage).toBeVisible();
+  });
+  
+  test('Unsuccessful log in to the system - invalid password', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const invalidPassword = 'Test';
+    
+    await loginPage.emailInput.fill(username);
+    await loginPage.passwordInput.fill(invalidPassword);
+
+    await loginPage.loginButton.click();
+
+    await expect(loginPage.loginErrorMessage).toBeVisible();
+  });
 });
