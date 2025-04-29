@@ -8,6 +8,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      DEMO_SAAS_USERNAME: ${{ secrets.DEMO_SAAS_USERNAME }}
+      DEMO_SAAS_PASSWORD: ${{ secrets.DEMO_SAAS_PASSWORD }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
