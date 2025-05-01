@@ -19,4 +19,11 @@ export class LoginPage{
         this.loginErrorMessage = this.page.locator('p', { hasText: /^Invalid email or password$/});
         this.invalidEmailErrorMessage = this.page.locator('p', { hasText: /^Invalid email$/});
     }
+    async logIn(username, password){
+        await this.page.goto('');
+        await this.logInButtonHomePage.click();
+        await this.emailInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
+    }
 }
