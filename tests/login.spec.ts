@@ -34,7 +34,7 @@ test.describe('Verify Log in to the system', () => {
 
     await expect(loginPage.loginErrorMessage).toBeVisible();
   });
-  test('Reject login with incorrect email without @', async ({ page }) => {
+  test('Reject login with email without @', async ({ page }) => {
     const invalidEmail = 'test.gmail.com';
    
     await loginPage.emailInput.fill(invalidEmail);
