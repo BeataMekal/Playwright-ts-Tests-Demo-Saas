@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-export class LoginPage{
+import { BasePage } from './base.page';
+export class LoginPage extends BasePage {
     loginHeading: Locator;
     emailInput: Locator;
     passwordInput: Locator;
@@ -9,7 +10,8 @@ export class LoginPage{
     loginErrorMessage: Locator;
     invalidEmailErrorMessage: Locator;
     
-    constructor(private page: Page) {
+    constructor(page: Page) {
+        super(page);
         this.emailInput = this.page.locator('input[name="email"]');
         this.passwordInput = this.page.locator('input[name="password"]');
         this.pageHeading = this.page.locator('p span', { hasText: 'Title'});

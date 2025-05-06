@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
+import { BasePage } from "./base.page";
 
-export class TicketsNewPage{
+export class TicketsNewPage extends BasePage {
     submitNewTicketHeading: Locator;
     reportedByInput: Locator;
     yourNameInput: Locator;
@@ -8,7 +9,8 @@ export class TicketsNewPage{
     descriptionInput: Locator;
     submitButton: Locator;
     
-    constructor(private page: Page) {
+    constructor(page: Page) {
+        super(page);
         this.submitNewTicketHeading = this.page.locator('.mantine-Text-root:has-text("Submit new ticket")');
         this.reportedByInput = this.page.locator('input[name="reportedBy"]');
         this.yourNameInput = this.page.locator('input[name="authorName"]');
