@@ -1,8 +1,6 @@
-name: Playwright Tests
+name: Playwright Demo Saas Tests
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
     branches: [ main, master ]
 jobs:
   test:
@@ -21,7 +19,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --reporter=html
+    - name: Deploy Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./playwright-report
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
