@@ -116,4 +116,43 @@ test.describe('Verify create ticket functionality', () => {
 
     await ticketsNewPage.oneCharMessage.isVisible();
 });
+  test('Reject creating ticket without title', async ({ page }) => {
+    const ticketsPage = new TicketsPage(page);
+    const ticketsNewPage = new TicketsNewPage(page);
+    const titleText = ''
+    const ticketData = prepareRandomTicket();
+
+    //wait for tickets in table
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    await ticketsPage.newButton.click();
+    await expect(ticketsNewPage.submitNewTicketHeading).toBeVisible();
+    await expect(ticketsNewPage.reportedByInput).toHaveValue(username);
+    await ticketsNewPage.yourNameInput.fill(ticketData.name);
+    await ticketsNewPage.titleInput.fill(titleText);
+    await ticketsNewPage.descriptionInput.fill(ticketData.description);
+    await ticketsNewPage.submitButton.click();
+
+    await ticketsNewPage.oneCharMessage.isVisible();
+  });
+
+  test('Reject creating ticket without description', async ({ page }) => {
+    const ticketsPage = new TicketsPage(page);
+    const ticketsNewPage = new TicketsNewPage(page);
+    const descriptionText = ''
+    const ticketData = prepareRandomTicket();
+
+    //wait for tickets in table
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    await ticketsPage.newButton.click();
+    await expect(ticketsNewPage.submitNewTicketHeading).toBeVisible();
+    await expect(ticketsNewPage.reportedByInput).toHaveValue(username);
+    await ticketsNewPage.yourNameInput.fill(ticketData.name);
+    await ticketsNewPage.titleInput.fill(ticketData.title);
+    await ticketsNewPage.descriptionInput.fill(descriptionText);
+    await ticketsNewPage.submitButton.click();
+
+    await ticketsNewPage.oneCharMessage.isVisible();
+  });
 });
