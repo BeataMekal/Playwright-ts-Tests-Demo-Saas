@@ -83,5 +83,18 @@ test.describe('Verify Log in to the system', () => {
     await expect(ticketsPage.createdAtTextFirst).toHaveText(createdNowText);
 
     });
-    
+  test('Should return to previous page when click on Go back button on Create new ticket page', async ({ page }) => {
+    const ticketsPage = new TicketsPage(page);
+    const ticketsNewPage = new TicketsNewPage(page);
+
+    //wait for tickets in table
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    await ticketsPage.newButton.click();
+    await expect(ticketsNewPage.submitNewTicketHeading).toBeVisible();
+    await ticketsNewPage.goBackButton.click();
+
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    });
 });
