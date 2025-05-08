@@ -8,7 +8,7 @@ import { prepareRandomTicket } from "../src/factories/ticket.factory";
 
 let loginPage: LoginPage;
 
-test.describe('Verify Log in to the system', () => {
+test.describe('Verify create ticket functionality', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     await loginPage.logIn(username, password);
@@ -97,4 +97,23 @@ test.describe('Verify Log in to the system', () => {
     await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
 
     });
+  test('Reject creating ticket without author name', async ({ page }) => {
+    const ticketsPage = new TicketsPage(page);
+    const ticketsNewPage = new TicketsNewPage(page);
+    const nameText = ''
+    const ticketData = prepareRandomTicket();
+
+    //wait for tickets in table
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    await ticketsPage.newButton.click();
+    await expect(ticketsNewPage.submitNewTicketHeading).toBeVisible();
+    await expect(ticketsNewPage.reportedByInput).toHaveValue(username);
+    await ticketsNewPage.yourNameInput.fill(nameText);
+    await ticketsNewPage.titleInput.fill(ticketData.title);
+    await ticketsNewPage.descriptionInput.fill(ticketData.description);
+    await ticketsNewPage.submitButton.click();
+
+    await ticketsNewPage.oneCharMessage.isVisible();
+});
 });

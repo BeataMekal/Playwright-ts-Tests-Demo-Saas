@@ -9,6 +9,7 @@ export class TicketsNewPage extends BasePage {
     descriptionInput: Locator;
     submitButton: Locator;
     goBackButton: Locator;
+    oneCharMessage: Locator;
     
     constructor(page: Page) {
         super(page);
@@ -19,5 +20,6 @@ export class TicketsNewPage extends BasePage {
         this.descriptionInput = this.page.locator('textarea[name="body"]');
         this.submitButton = this.page.locator('.mantine-Button-label:has-text("Submit")');
         this.goBackButton = this.page.locator('.mantine-Button-label:has-text("Go back")');
+        this.oneCharMessage = this.page.locator('p.mantine-InputWrapper-error.mantine-TextInput-error:has-text("String must contain at least 1 character(s)")');
     }
 }
