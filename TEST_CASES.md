@@ -1,13 +1,13 @@
 # Test Cases for Demo Saas Application
 ## Table of Test Cases: 
 
-Test Cases verifying login functionality
+### Test Cases verifying login functionality
 * [1. Test Case: Log in with correct credentials](#1-test-case-log-in-with-correct-credentials)
 * [2. Test Case: Reject login with email without @](#2-test-case-reject-login-with-email-without-)
 * [3. Test Case: Reject login with incorrect email](#3-test-case-reject-login-with-incorrect-email)
 * [4. Test Case: Reject login with incorrect password](#4-test-case-reject-login-with-incorrect-password)
 
-Test Cases verifying ticket functionality
+### Test Cases verifying ticket functionality
 * [5. Test Case: Create ticket with all filled fields](#5-test-case-create-ticket-with-all-filled-fields)
 * [6. Test Case: Should create ticket with one character in all fields](#6-test-case-should-create-ticket-with-one-character-in-all-fields)
 * [7. Test Case: Should return to previous page when click on Go back button on Create new ticket page](#7-test-case-should-return-to-previous-page-when-click-on-go-back-button-on-create-new-ticket-page)
