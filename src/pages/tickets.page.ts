@@ -20,4 +20,12 @@ export class TicketsPage extends BasePage {
         const reportedByValueLocator = page.locator(`.mantine-Text-root:has-text("${username}")`).first();
         return reportedByValueLocator;
     }
-}
+    getStatusValueLocator(page: Page, statusName: string){
+        const statusValueLocator = page.locator(`.mantine-Badge-label:has-text("${statusName}")`).first();
+        return statusValueLocator;
+    }
+    getTicketRowByTitleLocator(page: Page, title: string){
+        const ticketRows = page.locator(`div.transition_background-color_100ms_ease:has-text("${title}")`);
+        return ticketRows;
+    }
+    }
