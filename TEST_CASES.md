@@ -1,5 +1,5 @@
 # Test Cases for Demo Saas Application
-Table of Test Cases: 
+## Table of Test Cases: 
 
 Test Cases verifying login functionality
 * [1. Test Case: Log in with correct credentials](#1-test-case-log-in-with-correct-credentials)
