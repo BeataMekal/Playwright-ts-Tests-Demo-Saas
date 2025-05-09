@@ -1,7 +1,7 @@
 # Demo Saas Playwright Tests
 [![Tests status](https://github.com/BeataMekal/demo-saas/actions/workflows/test-runner.yaml/badge.svg)](https://github.com/BeataMekal/demo-saas/actions/workflows/test-runner.yaml)
 
-[View Playwright HTML report](https://beatamekal.github.io/demo-saas/)
+[View Playwright HTML report](https://beatamekal.github.io/Playwright-ts-Tests-Demo-Saas/)
 
 [View Test Cases](TEST_CASES.md)
 
