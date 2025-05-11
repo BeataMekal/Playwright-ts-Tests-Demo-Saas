@@ -11,7 +11,7 @@ let ticketsPage: TicketsPage;
 let ticketPage: TicketPage;
 
 test.describe.configure({ mode: 'serial' });
-test.describe('Verify ticket status functionality', () => {
+test.describe('Verify ticket status change functionality', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     ticketsPage = new TicketsPage(page);
