@@ -3,6 +3,8 @@ import { LoginPage } from "../src/pages/login.page";
 import { password, username } from "../config/config-variables";
 import { TicketsPage } from "../src/pages/tickets.page";
 import { TicketPage } from "../src/pages/ticket.page";
+import { TicketsNewPage } from "../src/pages/ticketsNew.page";
+import { prepareRandomTicket } from "../src/factories/ticket.factory";
 
 let loginPage: LoginPage;
 let ticketsPage: TicketsPage;
@@ -14,9 +16,22 @@ test.describe('Verify ticket status functionality', () => {
     loginPage = new LoginPage(page);
     ticketsPage = new TicketsPage(page);
     ticketPage = new TicketPage(page);
-
+    const ticketsNewPage = new TicketsNewPage(page);
 
     await loginPage.logIn(username, password);
+    const ticketData = prepareRandomTicket();
+    
+    //wait for tickets in table
+    await expect(ticketsPage.getReportedByValueLocator(page, username)).toBeVisible();
+
+    await ticketsPage.newButton.click();
+    await ticketsNewPage.yourNameInput.fill(ticketData.name);
+    await ticketsNewPage.titleInput.fill(ticketData.title);
+    await ticketsNewPage.descriptionInput.fill(ticketData.description);
+    await ticketsNewPage.submitButton.click();
+
+    await expect(ticketPage.createdTicketAlert).toBeVisible();
+    await ticketsPage.goto();
   });
   test('Change ticket status from new to in progress', async ({ page }) => {
     const statusFirstBadgeText = 'New';
