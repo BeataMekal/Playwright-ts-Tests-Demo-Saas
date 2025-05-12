@@ -1,10 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
+
+export const STORAGE_STATE = path.join(__dirname, 'playwright/.auth/login.json');
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
+  timeout: 50_000,
   expect: { timeout: 50_000 },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -23,19 +27,19 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium non logged',
+      grepInvert: /@logged/,
       use: { ...devices['Desktop Chrome'] },
     },
-
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'chromium logged',
+      grep: /@logged/,
+      use: { ...devices['Desktop Chrome'], storageState: STORAGE_STATE },
+      dependencies: ['setup'],
     },
-
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'setup',
+      testMatch: '**/*.setup.ts',
     },
-
   ],
 });
