@@ -15,10 +15,8 @@ test.describe("Verify ticket status change functionality", () => {
     ticketsPage = new TicketsPage(page);
     ticketPage = new TicketPage(page);
   });
-  test("Change ticket status from new to in progress", { tag: '@logged' }, async ({ page }) => {
+  test("Create ticket", { tag: '@logged' }, async ({ page }) => {
     const ticketsNewPage = new TicketsNewPage(page);
-    const statusFirstBadgeText = "New";
-    const statusSecondBadgeText = "In Progress";
 
     await ticketsPage.goto();
     const ticketData = prepareRandomTicket();
@@ -35,10 +33,16 @@ test.describe("Verify ticket status change functionality", () => {
     await ticketsNewPage.submitButton.click();
 
     await expect(ticketPage.createdTicketAlert).toBeVisible();
+  });
+  test("Change ticket status from new to in progress", { tag: '@logged' }, async ({ page }) => {
+    const statusSecondBadgeText = "In Progress";
     // //wait and click in ticket status in tickets table
-
-    await expect(ticketPage.titleText).toBeVisible();
-    await ticketPage.statusBadge.click();
+    await ticketsPage.goto();
+    await expect(
+      ticketsPage.getReportedByValueLocator(page, username)
+    ).toBeVisible();
+    await ticketsPage.titleTextFirst.click();
+    await ticketPage.newStatusBadge.click();
     await ticketPage.inProgressStatusBadgeSelect.click();
     const ticketTitle = await ticketPage.titleText.textContent();
 
