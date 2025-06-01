@@ -5,7 +5,6 @@ import { TicketPage } from "../src/pages/ticket.page";
 import { TicketsNewPage } from "../src/pages/ticketsNew.page";
 import { prepareRandomTicket } from "../src/factories/ticket.factory";
 
-// let loginPage: LoginPage;
 let ticketsPage: TicketsPage;
 let ticketPage: TicketPage;
 
